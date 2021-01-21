@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeNumberFinder", "PrimeNumberFinder\PrimeNumberFinder.csproj", "{118F9A8F-AEDB-4D72-9D7C-923852273596}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{118F9A8F-AEDB-4D72-9D7C-923852273596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{118F9A8F-AEDB-4D72-9D7C-923852273596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{118F9A8F-AEDB-4D72-9D7C-923852273596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{118F9A8F-AEDB-4D72-9D7C-923852273596}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8E3E78B-C4BB-4108-B4A6-781B2EB4F962}
+	EndGlobalSection
+EndGlobal
