@@ -11,218 +11,160 @@ namespace PrimeNumberFinder
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
-        private static CancellationTokenSource cts;
-        private CancellationToken ct;
+        public List<MethodBlock> Blocks { get; set; }
+        public MainWindow()
+        {
+            InitializeComponent();
+            Blocks = new List<MethodBlock>
+            {
+                new MethodBlock(),
+                new MethodBlock(),
+                new MethodBlock()
+            };
 
+            DataContext = Blocks;
+        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private async void Button_Click_Meth1(object sender, RoutedEventArgs e)
+        {
+            MethodBlock logic = Blocks[0];
 
-        public delegate Task<string> FindNumber(int tis, int num);
+            var calc = logic.Method1Async();
+            var load = logic.LoadingAsync();
+            logic.IsFree = false;
 
-        public List<FindNumber> Methods { get; set; }
+            var tasks = new List<Task> { calc, load };
 
-        public FindNumber SelectedMethod { get; set; }
+            await Task.WhenAll(tasks);
+            logic.IsFree = true;
+        }
+
+        private async void Button_Click_Meth2(object sender, RoutedEventArgs e)
+        {
+            MethodBlock logic = Blocks[1];
+
+            var calc = logic.Method1Async();
+            var load = logic.LoadingAsync();
+            logic.IsFree = false;
+
+            var tasks = new List<Task> { calc, load };
+
+            await Task.WhenAll(tasks);
+        }
+
+        private async void Button_Click_Meth3(object sender, RoutedEventArgs e)
+        {
+            MethodBlock logic = Blocks[2];
+
+            var calc = logic.Method1Async();
+            var load = logic.LoadingAsync();
+            logic.IsFree = false;
+
+            var tasks = new List<Task> { calc, load };
+
+            await Task.WhenAll(tasks);
+            logic.IsFree = true;
+        }
+    }
+
+    public class MethodBlock : INotifyPropertyChanged
+    {
+        #region Properties
 
         private int times;
-        public int Times
-        {
-            get { return times; }
-            set
+        public int Times 
+        { 
+            get => times;
+            set 
             {
                 times = value;
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Times"));
+                OnPropertyChanged("Times");
             }
         }
 
         private int number;
         public int Number
-        {
-            get { return number; }
+        { 
+            get => number;
             set
             {
                 number = value;
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Number"));
+                OnPropertyChanged("Number");
             }
         }
 
-        private string tb1;
-        public string TB1
-        {
-            get { return tb1; }
+        private bool isFree;
+        public bool IsFree 
+        { 
+            get => isFree;
             set
             {
-                tb1 = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TB1"));
+                isFree = value;
+                OnPropertyChanged("IsFree");
             }
         }
 
-        private string tb2;
-        public string TB2
+        private string output;
+        public string Output
         {
-            get { return tb2; }
+            get => output;
             set
             {
-                tb2 = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TB2"));
+                output = value;
+                OnPropertyChanged("Output");
             }
         }
 
-        private string tb3;
-        public string TB3
+        #endregion
+
+        public MethodBlock()
         {
-            get { return tb3; }
-            set
-            {
-                tb3 = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TB3"));
-            }
+            Times = 0;
+            Number = 0;
+            IsFree = true;
+            Output = "";
         }
 
-        private int taskId;
-        public int TaskId
+        public async Task Method1Async()
         {
-            get { return taskId; }
-            set
-            {
-                taskId = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TaskId"));
-            }
+            isFree = false;
+            await Task.Delay(3117);
+            isFree = true;
+            Output = "10";
         }
 
-        private bool isEnable;
-        public bool IsEnable
-        {
-            get { return isEnable; }
-            set
-            {
-                isEnable = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsEnable"));
-            }
-        }
-
-
-        public MainWindow()
-        {
-            InitializeComponent();
-            Methods = new List<FindNumber>
-            {
-                FindNumNTimes
-            };
-            SelectedMethod = Methods[0];
-            TaskId = 0;
-            IsEnable = true;
-            DataContext = this;
-        }
-
-        private async Task<string> FindNumNTimes(int tis, int num)
-        {
-            int primeNum = (int)Math.Pow(10, tis - 1);
-            primeNum = 1;
-            bool right = true;
-
-            await Task.Run(() =>
-            {
-                while (right)
-                {
-                    int ctr = 0;
-
-                    for (int i = 2; i <= primeNum / 2; i++)
-                    {
-                        if (primeNum % i == 0)
-                        {
-                            ctr++;
-                        }
-                    }
-
-                    if (ctr == 0 && primeNum != 1)
-                    {
-                        int count = 0;
-                        for (int i = 0; i < primeNum.ToString().Length; i++)
-                        {
-                            int some = Convert.ToInt32(primeNum.ToString()[i].ToString());
-                            if (some == num)
-                                count++;
-                        }
-
-                        if (count >= tis)
-                        {
-                            cts.Cancel();
-                            right = false;
-                            Console.WriteLine(primeNum);
-                            break;
-                        }
-                    }
-                    primeNum++;
-                }
-            });
-
-            Thread.Sleep(3000);
-            return primeNum.ToString();
-        }
-
-        private async Task<string> LoadingAsync(int id)
+        public async Task LoadingAsync()
         {
             await Task.Run(() =>
             {
-                while (ct.IsCancellationRequested == false)
+                while (IsFree == false)
                 {
-                    if (id == 1)
+                    if (IsFree == false)
                     {
-                        TB1 = "Načítání .";
-                        Thread.Sleep(1000);
-                        TB1 = "Načítání ..";
-                        Thread.Sleep(1000);
-                        TB1 = "Načítání ...";
+                        Output = "Počítám.";
                         Thread.Sleep(1000);
                     }
-                    if (id == 2)
+
+                    if (IsFree == false)
                     {
-                        TB2 = "Načítání .";
-                        Thread.Sleep(1000);
-                        TB2 = "Načítání ..";
-                        Thread.Sleep(1000);
-                        TB2 = "Načítání ...";
+                        Output = "Počítám..";
                         Thread.Sleep(1000);
                     }
-                    if (id == 3)
+
+                    if (IsFree == false)
+
                     {
-                        TB3 = "Načítání .";
-                        Thread.Sleep(1000);
-                        TB3 = "Načítání ..";
-                        Thread.Sleep(1000);
-                        TB3 = "Načítání ...";
+                        Output = "Počítám...";
                         Thread.Sleep(1000);
                     }
                 }
             });
-            TaskId--;
-            return "";
         }
 
-        private async void Button_Click_Find(object sender, RoutedEventArgs e)
-        {
-            cts = new CancellationTokenSource();
-            ct = cts.Token;
-
-            TaskId++;
-            if (TaskId >= 3)
-            {
-                IsEnable = false;
-                TaskId = 3;
-            }
-            else
-            {
-                isEnable = true;
-                string output = await SelectedMethod(Times, Number);
-                TB1 = output;
-            }
-        }
-
-        private async void Button_Click_Loading(object sender, RoutedEventArgs e)
-        {
-            await LoadingAsync(TaskId);
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

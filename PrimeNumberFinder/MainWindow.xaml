@@ -3,45 +3,69 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PrimeNumberFinder"
+        xmlns:local="clr-namespace:PrimeNumberFinder" 
+        d:DataContext="{d:DesignInstance Type=local:MethodBlock}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <!--<StackPanel>
-        <TextBox x:Name="MocpraceText" 
-                 Text ="{Binding TB1}" 
-                 TextAlignment="Center"/>
-        <Button Content="FindNTimes" Click="Button_Click_FindNTimes"/>
-    </StackPanel>-->
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*" />
-            <RowDefinition Height="0.1*" />
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.3*" />
-            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.1*" />
-            <ColumnDefinition Width="0.1*" />
-            <ColumnDefinition Width="0.35*" />
-            <ColumnDefinition Width="0.25*" />
+            <ColumnDefinition Width="0.33*" />
+            <ColumnDefinition Width="0.33*" />
+            <ColumnDefinition Width="0.33*" />
         </Grid.ColumnDefinitions>
 
-        <Label Content="Kolikrát: " VerticalAlignment="Bottom" FontSize="20"/>
-        <TextBox Grid.Row="1" Grid.Column="0" FontSize="20" Text="{Binding Times}" />
+        <Label Grid.Column="0">
+            Metoda1: 
+        </Label>
+        <Label Grid.Column="1">
+            Metoda2: 
+        </Label>
+        <Label Grid.Column="2">
+            Metoda3: 
+        </Label>
 
-        <Label Grid.Column="1" Content="Jaké číslo: " VerticalAlignment="Bottom" FontSize="20"/>
-        <TextBox Grid.Row="1" Grid.Column="1" FontSize="20" Text="{Binding Number}" />
+        <Grid Grid.Row="1" Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+                <ColumnDefinition Width="0.33*" />
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="2" Content="{Binding TaskId}" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="20"/>
+            <TextBox Grid.Column="0" Text="0" FontSize="24" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Text="0" FontSize="24" VerticalAlignment="Center" />
+            <Button Grid.Column="2" Content="Spustit" FontSize="20" VerticalAlignment="Center" 
+                    Click="Button_Click_Meth1" IsEnabled="{Binding [0].IsFree}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" FontSize="24"
+                       Text="{Binding [0].Output}"/>
+                
+            <TextBox Grid.Column="3" Text="0" FontSize="24" VerticalAlignment="Center" />
+            <TextBox Grid.Column="4" Text="0" FontSize="24" VerticalAlignment="Center" />
+            <Button Grid.Column="5" Content="Spustit" FontSize="20" VerticalAlignment="Center" 
+                    Click="Button_Click_Meth2" IsEnabled="{Binding [1].IsFree}"/>
+            <TextBlock Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" FontSize="34" />
 
-        <ComboBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Methods}" SelectedItem="{Binding SelectedMethod}"/>
+            <TextBox Grid.Column="6" Text="0" FontSize="24" VerticalAlignment="Center" />
+            <TextBox Grid.Column="7" Text="0" FontSize="24" VerticalAlignment="Center" />
+            <Button Grid.Column="8" Content="Spustit" FontSize="20" VerticalAlignment="Center" 
+                    Click="Button_Click_Meth3" IsEnabled="{Binding [2].IsFree}"/>
+            <TextBlock Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" FontSize="34" />
 
-        <Button Grid.Column="3" Content="Načítání" Click="Button_Click_Loading" IsEnabled="{Binding IsEnabled}" />
-        <Button Grid.Row="1" Grid.Column="3" Content="Najít" Click="Button_Click_Find" IsEnabled="{Binding IsEnabled}" />
+        </Grid>
 
-        <TextBlock Grid.Row="2" Grid.ColumnSpan="4" Text="{Binding TB1}" FontSize="34" />
-        <TextBlock Grid.Row="3" Grid.ColumnSpan="4" Text="{Binding TB2}" FontSize="34" />
-        <TextBlock Grid.Row="4" Grid.ColumnSpan="4" Text="{Binding TB3}" FontSize="34" />
     </Grid>
 </Window>
