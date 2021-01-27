@@ -19,15 +19,22 @@
             <ColumnDefinition Width="0.33*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0">
-            Metoda1: 
-        </Label>
-        <Label Grid.Column="1">
-            Metoda2: 
-        </Label>
-        <Label Grid.Column="2">
-            Metoda3: 
-        </Label>
+        <TextBlock Grid.Column="0" TextWrapping="Wrap">
+            Číslo obsahuje alespoň (1.č)krát číslici (2.č)
+            <LineBreak />1.č - kolikrát bude minimálně obsahovat
+            <LineBreak />2.č - jaké číslo bude obsahovat
+            <LineBreak />Např. [3]krát číslo [7] bude výsledek 1777
+        </TextBlock>
+        <TextBlock Grid.Column="1" TextWrapping="Wrap">
+            Kolik prvočísel je v rozmezí 1 až (1.č)
+            <LineBreak />1.č - do jakého čísla
+            <LineBreak />Např. [10] bude výsledek 4
+        </TextBlock>
+        <TextBlock Grid.Column="2">
+            Najdi prvočíslo podle indexu [1.č]
+            <LineBreak />1.č - index hledaného čísla
+            <LineBreak />Např. [10]té prvočíslo je 29
+        </TextBlock>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
@@ -46,24 +53,32 @@
                 <ColumnDefinition Width="0.33*" />
             </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Column="0" Text="0" FontSize="24" VerticalAlignment="Center" />
-            <TextBox Grid.Column="1" Text="0" FontSize="24" VerticalAlignment="Center" />
+            <TextBox Grid.Column="0" FontSize="24" VerticalAlignment="Center" 
+                     Text="{Binding [0].Times}" />
+            <TextBox Grid.Column="1" FontSize="24" VerticalAlignment="Center" 
+                     Text="{Binding [0].Number}" />
             <Button Grid.Column="2" Content="Spustit" FontSize="20" VerticalAlignment="Center" 
                     Click="Button_Click_Meth1" IsEnabled="{Binding [0].IsFree}"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" FontSize="24"
-                       Text="{Binding [0].Output}"/>
+                       Text="{Binding [0].Output}" />
                 
-            <TextBox Grid.Column="3" Text="0" FontSize="24" VerticalAlignment="Center" />
-            <TextBox Grid.Column="4" Text="0" FontSize="24" VerticalAlignment="Center" />
+            <!--<TextBox Grid.Column="3" FontSize="24" VerticalAlignment="Center"
+                     Text="{Binding [1].Times}" />-->
+            <TextBox Grid.Column="3" Grid.ColumnSpan="2" FontSize="24" VerticalAlignment="Center"
+                     Text="{Binding [1].Number}" />
             <Button Grid.Column="5" Content="Spustit" FontSize="20" VerticalAlignment="Center" 
                     Click="Button_Click_Meth2" IsEnabled="{Binding [1].IsFree}"/>
-            <TextBlock Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" FontSize="34" />
+            <TextBlock Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" FontSize="24" 
+                       Text="{Binding [1].Output}" />
 
-            <TextBox Grid.Column="6" Text="0" FontSize="24" VerticalAlignment="Center" />
-            <TextBox Grid.Column="7" Text="0" FontSize="24" VerticalAlignment="Center" />
+            <!--<TextBox Grid.Column="6" FontSize="24" VerticalAlignment="Center"
+                     Text="{Binding [2].Times}" />-->
+            <TextBox Grid.Column="6" Grid.ColumnSpan="2" FontSize="24" VerticalAlignment="Center"
+                     Text="{Binding [2].Number}" />
             <Button Grid.Column="8" Content="Spustit" FontSize="20" VerticalAlignment="Center" 
                     Click="Button_Click_Meth3" IsEnabled="{Binding [2].IsFree}"/>
-            <TextBlock Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" FontSize="34" />
+            <TextBlock Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" FontSize="24" 
+                       Text="{Binding [2].Output}" />
 
         </Grid>
 
