@@ -1,7 +1,8 @@
 # PrimeNumberFinder
 
-Nedodělaný projekt.
+*NEDODĚLANÝ PROJEKT*
 
-Aplikace zcela nefunguje. Zatím je pouze jedna logika pro nalezení čísla. (Kolikrát se vyskytuje určíté číslo)
+Na projektu se stále pracuje.
 
-Postupem času opravím a dodělám.
+Program zcela změněn. 
+3 sloupce se třemi metodami.
