@@ -1,8 +1,9 @@
 # PrimeNumberFinder
 
-*NEDODĚLANÝ PROJEKT*
+*HOTOVÝ PROJEKT*
 
-Na projektu se stále pracuje.
-
-Program zcela změněn. 
+Projekt je dodělaný. 
+ 
 3 sloupce se třemi metodami.
+
+Všechny pracují async.
